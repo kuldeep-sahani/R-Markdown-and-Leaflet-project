@@ -1,0 +1,35 @@
+---
+title: 'Peer-graded Assignment: R Markdown and Leaflet'
+always_allow_html: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(magrittr)
+library(leaflet)
+```
+
+```{r echo=FALSE, comment=NA}
+l_today <- Sys.Date()
+cat( paste( "Wiesbaden,", format( l_today, format="%B %d %Y") ) )
+```
+
+```{r echo=FALSE, eval=FALSE}
+library(ggmap)
+(l_wi <- geocode("Marktplatz, Wiesbaden"))
+##        lon      lat
+## 1 8.242597 50.08205
+```
+
+```{r, echo=FALSE}
+set.seed( l_today )
+leaflet::leaflet() %>%
+leaflet::addTiles() %>%
+leaflet::addMarkers( lat=50.08205, lng=8.242597, 
+         popup="<a href='http://www.wiesbaden.de/en/'>Wiesbaden, Marktplatz</a>")
+
+```
+
